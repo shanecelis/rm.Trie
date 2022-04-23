@@ -21,7 +21,9 @@ namespace rm.Trie
 			internal set
 			{
 				_value = value;
-				hasValue = value != null;
+				/* Let's be like Dictionary<X, Y> where a null value is still a value. */
+				// hasValue = value != null;
+				hasValue = true;
 			}
 		}
 		private bool hasValue;

@@ -22,6 +22,24 @@ namespace rm.Trie.Test
 		#region Tests
 
 		[Test]
+		public void AddNull()
+		{
+			var trie = new TrieMap<Action>();
+			trie.Add("a", null);
+			Assert.IsNull(trie.ValueBy("a"));
+			Assert.IsTrue(trie.HasKey("a"));
+		}
+
+		[Test]
+		public void AddNonNullValue()
+		{
+			var trie = new TrieMap<Action>();
+			trie.Add("a", () => { ; });
+			Assert.IsNotNull(trie.ValueBy("a"));
+			Assert.IsTrue(trie.HasKey("a"));
+		}
+
+		[Test]
 		public void ValueBy01()
 		{
 			var trie = BuildSampleTrie();

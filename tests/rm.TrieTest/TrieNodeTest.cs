@@ -39,7 +39,7 @@ namespace rm.Trie.Test
 			tnode.Value = new Trie();
 			Assert.IsTrue(tnode.HasValue());
 			tnode.Value = null;
-			Assert.IsFalse(tnode.HasValue());
+			Assert.IsTrue(tnode.HasValue());
 			Assert.IsNull(tnode.Value);
 		}
 	}
