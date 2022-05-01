@@ -36,13 +36,13 @@ namespace rm.Trie
 		/// <summary>
 		/// Adds a word to the Trie.
 		/// </summary>
-		public void AddWord(string word)
+		public void AddWord(IEnumerable<char> word)
 		{
 			if (word == null)
 			{
 				throw new ArgumentNullException(nameof(word));
 			}
-			AddWord(rootTrieNode, word.ToCharArray());
+			AddWord(rootTrieNode, word);
 		}
 
 		/// <summary>
@@ -96,7 +96,7 @@ namespace rm.Trie
 		/// <summary>
 		/// Returns true if the word is present in the Trie.
 		/// </summary>
-		public bool HasWord(string word)
+		public bool HasWord(IEnumerable<char> word)
 		{
 			if (word == null)
 			{
@@ -109,7 +109,7 @@ namespace rm.Trie
 		/// <summary>
 		/// Returns true if the prefix is present in the Trie.
 		/// </summary>
-		public bool HasPrefix(string prefix)
+		public bool HasPrefix(IEnumerable<char> prefix)
 		{
 			if (prefix == null)
 			{
@@ -122,7 +122,7 @@ namespace rm.Trie
 		/// Gets the equivalent TrieNode in the Trie for given prefix. 
 		/// If prefix not present, then returns null.
 		/// </summary>
-		public TrieNode GetTrieNode(string prefix)
+		public TrieNode GetTrieNode(IEnumerable<char> prefix)
 		{
 			if (prefix == null)
 			{
@@ -216,7 +216,7 @@ namespace rm.Trie
 		/// length is 0, return.
 		/// </para>
 		/// </summary>
-		private void AddWord(TrieNode trieNode, char[] word)
+		private void AddWord(TrieNode trieNode, IEnumerable<char> word)
 		{
 			foreach (var c in word)
 			{

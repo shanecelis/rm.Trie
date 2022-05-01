@@ -13,7 +13,7 @@ namespace rm.Trie
 		/// <summary>
 		/// Adds a word to the Trie.
 		/// </summary>
-		void AddWord(string word);
+		void AddWord(IEnumerable<char> word);
 
 		/// <summary>
 		/// Removes word from the Trie.
@@ -39,18 +39,18 @@ namespace rm.Trie
 		/// <summary>
 		/// Returns true if the word is present in the Trie.
 		/// </summary>
-		bool HasWord(string word);
+		bool HasWord(IEnumerable<char> word);
 
 		/// <summary>
 		/// Returns true if the prefix is present in the Trie.
 		/// </summary>
-		bool HasPrefix(string prefix);
+		bool HasPrefix(IEnumerable<char> prefix);
 
 		/// <summary>
 		/// Gets the equivalent TrieNode in the Trie for given prefix. 
 		/// If prefix not present, then returns null.
 		/// </summary>
-		TrieNode GetTrieNode(string prefix);
+		TrieNode GetTrieNode(IEnumerable<char> prefix);
 
 		/// <summary>
 		/// Returns the count for the word in the Trie.

@@ -52,7 +52,7 @@ namespace rm.Trie
 			return trieNode;
 		}
 
-		internal TrieNodeBase GetTrieNodeInner(string prefix)
+		internal TrieNodeBase GetTrieNodeInner(IEnumerable<char> prefix)
 		{
 			TrieNodeBase trieNode = this;
 			foreach (var prefixChar in prefix)
