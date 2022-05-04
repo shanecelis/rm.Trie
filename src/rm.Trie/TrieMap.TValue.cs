@@ -36,7 +36,7 @@ namespace rm.Trie
 		/// <summary>
 		/// Gets TValue item for key from TrieMap.
 		/// </summary>
-		public TValue ValueBy(string key)
+		public TValue ValueBy(IEnumerable<char> key)
 		{
 			if (key == null)
 			{
@@ -46,10 +46,20 @@ namespace rm.Trie
 			return trieNode != null ? trieNode.Value : default(TValue);
 		}
 
+		private StringBuilder NewStringBuilder(IEnumerable<char> chars) {
+			var builder = new StringBuilder();
+			if (chars is string s)
+			  builder.Append(s);
+			else
+			  foreach (char c in chars)
+				builder.Append(c);
+			return builder;
+		}
+
 		/// <summary>
 		/// Gets TValue items by key prefix from TrieMap.
 		/// </summary>
-		public IEnumerable<TValue> ValuesBy(string keyPrefix)
+		public IEnumerable<TValue> ValuesBy(IEnumerable<char> keyPrefix)
 		{
 			if (keyPrefix == null)
 			{
@@ -59,7 +69,7 @@ namespace rm.Trie
 				Traverse
 				(
 					GetTrieNode(keyPrefix),
-					new StringBuilder(keyPrefix),
+					NewStringBuilder(keyPrefix),
 					(kBuilder, v) => v
 				))
 			{
@@ -78,7 +88,7 @@ namespace rm.Trie
 		/// <summary>
 		/// Gets keys by key prefix from TrieMap.
 		/// </summary>
-		public IEnumerable<string> KeysBy(string keyPrefix)
+		public IEnumerable<string> KeysBy(IEnumerable<char> keyPrefix)
 		{
 			if (keyPrefix == null)
 			{
@@ -88,7 +98,7 @@ namespace rm.Trie
 				Traverse
 				(
 					GetTrieNode(keyPrefix),
-					new StringBuilder(keyPrefix),
+					NewStringBuilder(keyPrefix),
 					(kBuilder, v) => kBuilder.ToString()
 				))
 			{
@@ -107,7 +117,7 @@ namespace rm.Trie
 		/// <summary>
 		/// Gets string->TValue pairs by key prefix from TrieMap.
 		/// </summary>
-		public IEnumerable<KeyValuePair<string, TValue>> KeyValuePairsBy(string keyPrefix)
+		public IEnumerable<KeyValuePair<string, TValue>> KeyValuePairsBy(IEnumerable<char> keyPrefix)
 		{
 			if (keyPrefix == null)
 			{
@@ -117,7 +127,7 @@ namespace rm.Trie
 				Traverse
 				(
 					GetTrieNode(keyPrefix),
-					new StringBuilder(keyPrefix),
+					NewStringBuilder(keyPrefix),
 					(kBuilder, v) => new KeyValuePair<string, TValue>(kBuilder.ToString(), v)
 				))
 			{
@@ -155,7 +165,7 @@ namespace rm.Trie
 		/// <summary>
 		/// Returns true if key present in TrieMap.
 		/// </summary>
-		public bool HasKey(string key)
+		public bool HasKey(IEnumerable<char> key)
 		{
 			return GetTrieNode(key)?.HasValue() ?? false;
 		}
@@ -163,7 +173,7 @@ namespace rm.Trie
 		/// <summary>
 		/// Returns true if key prefix present in TrieMap.
 		/// </summary>
-		public bool HasKeyPrefix(string keyPrefix)
+		public bool HasKeyPrefix(IEnumerable<char> keyPrefix)
 		{
 			return GetTrieNode(keyPrefix) != null;
 		}
@@ -172,7 +182,7 @@ namespace rm.Trie
 		/// Gets the equivalent TrieNode in the TrieMap for given key prefix.
 		/// If prefix not present, then returns null.
 		/// </summary>
-		public TrieNode<TValue> GetTrieNode(string keyPrefix)
+		public TrieNode<TValue> GetTrieNode(IEnumerable<char> keyPrefix)
 		{
 			if (keyPrefix == null)
 			{
@@ -228,7 +238,8 @@ namespace rm.Trie
 		/// DFS traversal starting from given TrieNode and yield.
 		/// </summary>
 		private IEnumerable<TResult> Traverse<TResult>(TrieNode<TValue> trieNode,
-			StringBuilder buffer, Func<StringBuilder, TValue, TResult> transform)
+													   StringBuilder buffer,
+													   Func<StringBuilder, TValue, TResult> transform)
 		{
 			if (trieNode == null)
 			{

@@ -69,7 +69,7 @@ namespace rm.Trie
 			return GetChild(character) != null;
 		}
 
-		public TrieNode<TValue> GetTrieNode(string prefix)
+		public TrieNode<TValue> GetTrieNode(IEnumerable<char> prefix)
 		{
 			if (prefix == null)
 			{

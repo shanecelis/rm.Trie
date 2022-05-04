@@ -11,12 +11,12 @@ namespace rm.Trie
 		/// <summary>
 		/// Gets TValue item for key from TrieMap.
 		/// </summary>
-		TValue ValueBy(string key);
+		TValue ValueBy(IEnumerable<char> key);
 
 		/// <summary>
 		/// Gets TValue items by key prefix from TrieMap.
 		/// </summary>
-		IEnumerable<TValue> ValuesBy(string keyPrefix);
+		IEnumerable<TValue> ValuesBy(IEnumerable<char> keyPrefix);
 
 		/// <summary>
 		/// Gets all TValue items from TrieMap.
@@ -26,7 +26,7 @@ namespace rm.Trie
 		/// <summary>
 		/// Gets keys by key prefix from TrieMap.
 		/// </summary>
-		IEnumerable<string> KeysBy(string keyPrefix);
+		IEnumerable<string> KeysBy(IEnumerable<char> keyPrefix);
 
 		/// <summary>
 		/// Gets all keys from TrieMap.
@@ -36,7 +36,7 @@ namespace rm.Trie
 		/// <summary>
 		/// Gets string->TValue pairs by key prefix from TrieMap.
 		/// </summary>
-		IEnumerable<KeyValuePair<string, TValue>> KeyValuePairsBy(string keyPrefix);
+		IEnumerable<KeyValuePair<string, TValue>> KeyValuePairsBy(IEnumerable<char> keyPrefix);
 
 		/// <summary>
 		/// Gets all string->TValue pairs from TrieMap.
@@ -51,18 +51,18 @@ namespace rm.Trie
 		/// <summary>
 		/// Returns true if key present in TrieMap.
 		/// </summary>
-		bool HasKey(string key);
+		bool HasKey(IEnumerable<char> key);
 
 		/// <summary>
 		/// Returns true if key prefix present in TrieMap.
 		/// </summary>
-		bool HasKeyPrefix(string keyPrefix);
+		bool HasKeyPrefix(IEnumerable<char> keyPrefix);
 
 		/// <summary>
 		/// Gets the equivalent TrieNode in the TrieMap for given key prefix.
 		/// If prefix not present, then returns null.
 		/// </summary>
-		TrieNode<TValue> GetTrieNode(string keyPrefix);
+		TrieNode<TValue> GetTrieNode(IEnumerable<char> keyPrefix);
 
 		/// <summary>
 		/// Removes key from TrieMap.
